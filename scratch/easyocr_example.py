@@ -2,7 +2,7 @@ import cv2
 import easyocr
 
 def go():
-    file_path = 'images/ac_unit.jpg'
+    file_path = '../images/ac_unit.jpg'
     image = cv2.imread(file_path)
 
     reader = easyocr.Reader(['en'])

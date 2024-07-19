@@ -27,13 +27,19 @@ def camera_loop():
             break
 
         norm_img = np.zeros((frame.shape[0], frame.shape[1]))
-        frame = cv2.normalize(frame, norm_img, 0, 255, cv2.NORM_MINMAX)
-        frame = cv2.threshold(frame, 100, 255, cv2.THRESH_BINARY)[1]
-        frame = cv2.GaussianBlur(frame, (1, 1), 0)
+        # frame = cv2.normalize(frame, norm_img, 0, 255, cv2.NORM_MINMAX)
+        # frame = cv2.threshold(frame, 100, 255, cv2.THRESH_BINARY)[1]
+        # frame = cv2.GaussianBlur(frame, (1, 1), 0)
 
         # Try to find text
         frame_text = pytesseract.image_to_string(frame)
-        print(f"Frame text: {frame_text}")
+        # print(f"Frame text: {frame_text}")
+        if len(frame_text) > 0:
+            if "hello" in frame_text.lower():
+                print("FOUND HELLO!!!!")
+            for text in frame_text:
+                if "hello" in text.lower():
+                    print("FOUND HELLO!!!!")
 
         # Show the frame to our screen
         cv2.imshow("Frame", frame)
@@ -47,10 +53,11 @@ def camera_loop():
 
 
 if __name__ == '__main__':
-    # filename1 = "images/1_python-ocr.jpg"
-    # image1 = np.array(Image.open(filename1))
-    # text1 = pytesseract.image_to_string(image1)
-    # print("text 1: " + text1)
+    filename1 = "images/1_python-ocr.jpg"
+    image1 = np.array(Image.open(filename1))
+    print(f'Shape: {image1.shape}')
+    text1 = pytesseract.image_to_string(image1)
+    print("text 1: " + text1)
     #
     # filename2 = "images/2_python-ocr.jpg"
     # image2 = np.array(Image.open(filename2))
